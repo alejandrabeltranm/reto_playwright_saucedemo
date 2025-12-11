@@ -1,17 +1,16 @@
-import { CreateProductPage } from '../interface/ui.interface.product';
-import { LoginPage } from '../interface/ui.interface.login';
+import { InicioSesionPage } from '../interface/ui.interface.inicioSesion';
+import { InicioPage } from '../interface/ui.interface.inicio';
+import { ClientesPage } from '../interface/ui.interface.clientes'; 
 
 export class TestSetup {
-    login: LoginPage;
-    productCreate: CreateProductPage;
-    selectProduct: any;
-    buysProduct: any;
-    randomProductName: string;
-    resultRandomProductName: string;
-    filePath: string;
+    inicioSesion: InicioSesionPage;
+    inicio: InicioPage;
+    clientes: ClientesPage;
 
     constructor(page: any) {
-        this.productCreate = new CreateProductPage(page);
-        this.login = new LoginPage(page);
+        this.inicioSesion = new InicioSesionPage(page);
+        this.inicio = new InicioPage(page);
+        this.clientes = new ClientesPage(page);
     }
 }
+  

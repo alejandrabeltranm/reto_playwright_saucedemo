@@ -1,0 +1,35 @@
+export const clientesData = [
+    { identificacion: '1010238651', nombres: 'Ale', apellidos: 'Beltrán'},
+    { identificacion: '1010238653', nombres: 'Sauce Labs', apellidos: 'Bike Light'},
+    { identificacion: '1010238654', nombres: 'Mari', apellidos: 'Morales'},
+    { identificacion: '1010238655', nombres: 'Juan', apellidos: 'Pérez'},
+    { identificacion: '1010238656', nombres: 'Luisa', apellidos: 'Gómez'},
+];
+
+export const ciudadesColombia = [
+    'Bogotá',
+    'Medellín',
+    'Cali',
+    'Barranquilla',
+    'Cartagena',
+    'Bucaramanga',
+    'Pereira',
+    'Santa Marta',
+    'Ibagué',
+    'Cúcuta',
+    'Villavicencio',
+    'Manizales',
+    'Neiva',
+    'Pasto',
+    'Armenia',
+    'Montería',
+    'Valledupar',
+    'Popayán',
+    'Tunja',
+    'Sincelejo',
+    'Florencia',
+    'Quibdó',
+    'Riohacha',
+    'Yopal',
+    'Mocoa'
+];

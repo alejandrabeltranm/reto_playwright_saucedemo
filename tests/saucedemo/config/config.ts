@@ -1,5 +1,5 @@
 export const config = {
-    baseUrl: 'https://www.saucedemo.com/'
+    baseUrl: 'https://qastaging.siigo.com/#/login'
 };
 
 export const messages = {

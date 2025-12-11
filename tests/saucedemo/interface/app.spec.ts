@@ -1,41 +1,29 @@
 import { test, expect } from '@playwright/test';
-import { user, userLocked } from '../data/users.data';
-import { nameProducts} from '../data/products.data';
+import { credenciales } from '../data/credenciales.data';
 import { TestSetup } from '../hooks/testSetup';
-import { ElementSelectorsLogin } from '../selectors/selectorsLogin';
-import { ElementSelectorsProducts } from '../selectors/selectorsProducts';
-import { messages } from '../config/config'; 
 
-test('Login Locked', async ({ page }) => {
+test('Login exitoso', async ({ page }) => {
     const setup = new TestSetup(page);
+
+    await setup.inicioSesion.goto();
+    await setup.inicioSesion.inicioSesion(credenciales.correo, credenciales.contrasena);
+
+    await page.waitForTimeout(5000);
+    const currentUrl = page.url();
     
-    await setup.login.goto();
-    await setup.login.login(userLocked.username, user.password);
-
-    const errorMessageText = await page.locator(ElementSelectorsLogin.errorMessage).textContent();
-    expect(errorMessageText).toBe('Epic sadface: Sorry, this user has been locked out.');
-
-    const message = await page.locator(ElementSelectorsLogin.errorMessage).textContent();
-    expect(message).toBe(messages.loginError);
+    expect(currentUrl).not.toMatch(/.*login/);
+    expect(currentUrl).toMatch(/.*siigo\.com/);
 });
 
-
-test('Product purchased', async ({ page }) => {
+test('Creación de un cliente', async ({ page }) => {
+    test.setTimeout(60000);
     const setup = new TestSetup(page);
-
-    await setup.login.goto();
-    await setup.productCreate.login(user.username, user.password);
-
-    const selectedProduct = nameProducts.find(product => product.name === 'product1');
-
-    if (selectedProduct) {
-        await setup.productCreate.selectProduct(selectedProduct.product);
-        
-        await setup.productCreate.buysProduct();
-    } else {
-        console.error('Product not found!!');
-    }
-
-    const message = await page.locator(ElementSelectorsProducts.thankYouOrder).textContent();
-    expect(message).toBe(messages.thankYouOrder);
+    
+    await setup.inicioSesion.goto();
+    await setup.inicioSesion.inicioSesion(credenciales.correo, credenciales.contrasena);
+    await setup.inicio.crearClientes();
+    await setup.clientes.datosBasicos();
+    await setup.clientes.guardarTercero();
+    await expect(page.locator('text=Tercero guardado exitosamente')).toBeVisible();
+    await page.waitForTimeout(5000);
 });
